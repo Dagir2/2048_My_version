@@ -1,0 +1,169 @@
+unit Image2048;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls,PBox,PGnMBox,
+  Vcl.Imaging.jpeg,math, Vcl.StdCtrls,Masiv;
+
+type
+  MBox =Array of TBox;
+  MImage = Array  [0..15] of TImage;
+  TForm1 = class(TForm)
+    Memo1: TMemo;
+    Button1: TButton;
+    procedure FormCreate(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure Button1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+  Box:MBox;
+  Image:MImage;
+  ILeft:Mleft;
+  DBox:TBox;
+  N:integer;
+  ITop:MTop;
+implementation
+
+{$R *.dfm}
+
+procedure TForm1.Button1Click(Sender: TObject);
+var
+i:integer;
+Gn:TGnMbox;
+begin
+for i := 0 to 11 do
+Box[i].Destroy;
+
+for i :=1 to 11 do
+   begin
+     Box[i]:=TBox.Create(Form1);
+     Box[i].Parent:=Form1;
+   end;
+  Gn:=TGnMbox.Create(False);
+Gn.Priority:=tpNormal;
+end;
+
+procedure TForm1.FormCreate(Sender: TObject);
+var
+Gn:TGnMBox;
+i,j:integer;
+begin
+ j:=50;
+ for i := 0 to 3 do
+  begin
+   Ileft[i]:=j;
+   ITop[i]:=j;
+   j:=j+100;
+  end;
+
+n:=0;
+
+  Image[0]:=TImage.Create(Form1);
+  Image[0].Parent:=Form1;
+  Image[0].Picture.LoadFromFile('2048/2.jpg');
+  Image[0].Visible:=false;
+
+  Image[1]:=TImage.Create(Form1);
+  Image[1].Parent:=Form1;
+   Image[1].Picture.LoadFromFile('2048/4.jpg');
+     Image[1].Visible:=false;
+
+   Image[2]:=TImage.Create(Form1);
+    Image[2].Parent:=Form1;
+   Image[2].Picture.LoadFromFile('2048/8.jpg');
+    Image[2].Visible:=false;
+
+   Image[3]:=TImage.Create(Form1);
+   Image[3].Parent:=self;
+   Image[3].Picture.LoadFromFile('2048/16.jpg');
+   Image[3].Visible:=false;
+
+    Image[4]:=TImage.Create(Form1);
+   Image[4].Parent:=Form1;
+   Image[4].Picture.LoadFromFile('2048/32.jpg');
+   Image[4].Visible:=false;
+
+   Image[5]:=TImage.Create(Form1);
+   Image[5].Parent:=Form1;
+   Image[5].Picture.LoadFromFile('2048/64.jpg');
+   Image[5].Visible:=false;
+
+   Image[6]:=TImage.Create(Form1);
+   Image[6].Parent:=Form1;
+   Image[6].Picture.LoadFromFile('2048/128.jpg');
+   Image[6].Visible:=false;
+
+   Image[7]:=TImage.Create(Form1);
+   Image[7].Parent:=Form1;
+   Image[7].Picture.LoadFromFile('2048/256.jpg');
+   Image[7].Visible:=false;
+
+   Image[8]:=TImage.Create(Form1);
+   Image[8].Parent:=Form1;
+   Image[8].Picture.LoadFromFile('2048/512.jpg');
+   Image[8].Visible:=false;
+
+   Image[9]:=TImage.Create(Form1);
+   Image[9].Parent:=Form1;
+   Image[9].Picture.LoadFromFile('2048/1024.jpg');
+   Image[9].Visible:=false;
+
+   Image[10]:=TImage.Create(Form1);
+   Image[10].Parent:=Form1;
+   Image[10].Picture.LoadFromFile('2048/2048.jpg');
+   Image[10].Visible:=false;
+
+
+
+Gn:=TGnMbox.Create(False);
+Gn.Priority:=tpNormal;
+end;
+
+procedure TForm1.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+  var i:integer;
+  Gn:TGnMBox;
+begin
+if key=VK_Down then
+begin
+ while True do
+ begin
+ //
+ //begin
+   if DBox.Top+100=450 then
+     begin
+     n:=n+1;
+     setlength(Box,n);
+  //box[n-1].Picture:=Image[Dbox.Fx].Picture;
+ // Box[n-1].Top:=DBox.Top;
+  //Box[n-1].Left:=DBox.Left;
+  //Box[n-1].Height:=100;
+  //Box[n-1].Width:=100;
+  //Box[n-1].Stretch:=true;
+  DBox.Destroy;
+  Gn:=TGnMbox.Create(False);
+Gn.Priority:=tpNormal;
+  exit;
+ end;
+
+
+  DBox.Top:=Dbox.Top+100;
+
+  end;
+end;
+
+  //Gn:=TGnMbox.Create(False);
+  //  Gn.Priority:=tpNormal;
+end;
+
+
+
+end.

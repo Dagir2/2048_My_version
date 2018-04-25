@@ -1,0 +1,17 @@
+program Project1;
+
+uses
+  Vcl.Forms,
+  Image2048 in 'Image2048.pas' {Form1},
+  PBox in 'PBox.pas',
+  PGnMBox in 'PGnMBox.pas',
+  Masiv in 'Masiv.pas';
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TForm1, Form1);
+  Application.Run;
+end.

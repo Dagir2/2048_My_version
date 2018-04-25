@@ -1,0 +1,81 @@
+unit Pmap;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Imaging.jpeg, Vcl.ExtCtrls;
+
+type
+  TForm1 = class(TForm)
+    Timer1: TTimer;
+    procedure FormCreate(Sender: TObject);
+    procedure Timer1Timer(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+  buf:TBitmap;
+  Fat:string;
+  map:Array [0..3,0..3] of integer;
+  Img:Array [0..11] of TJPEGImage;
+implementation
+
+{$R *.dfm}
+
+procedure TForm1.FormCreate(Sender: TObject);
+var i,j:integer;
+begin
+
+  buf:=TBitmap.Create;
+  buf.Height:=512;
+  buf.Width:=512;
+
+ for i := 0 to 11 do
+ begin
+ Img[i]:=TJPEGImage.Create;
+ Img[i].LoadFromFile('2048/'+IntToStr(i)+'.jpg');
+ end;
+
+ for i := 0 to 3 do
+ for j := 0 to 3 do
+  map[i,j]:=0;
+
+
+
+
+end;
+
+procedure TForm1.Timer1Timer(Sender: TObject);
+var i,j:integer;
+begin
+ for i := 0 to 3 do
+ for j := 0 to 3 do
+  begin
+   case map[i,j] of
+   0:Buf.Canvas.Draw(i*128,j*128,IMG[0]);
+   2:Buf.Canvas.Draw(i*128,j*128,IMG[1]);
+   4:Buf.Canvas.Draw(i*128,j*128,IMG[2]);
+   8:Buf.Canvas.Draw(i*128,j*128,IMG[3]);
+   16:Buf.Canvas.Draw(i*128,j*128,IMG[4]);
+   32:Buf.Canvas.Draw(i*128,j*128,IMG[5]);
+   64:Buf.Canvas.Draw(i*128,j*128,IMG[6]);
+   128:Buf.Canvas.Draw(i*128,j*128,IMG[7]);
+   256:Buf.Canvas.Draw(i*128,j*128,IMG[8]);
+   512:Buf.Canvas.Draw(i*128,j*128,IMG[9]);
+   1024:Buf.Canvas.Draw(i*128,j*128,IMG[10]);
+   2048:Buf.Canvas.Draw(i*128,j*128,IMG[11]);
+   end;
+
+
+  end;
+
+  form1.Canvas.Draw(0,0,buf);
+
+end;
+
+end.
