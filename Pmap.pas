@@ -12,6 +12,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
   private
     { Private declarations }
   public
@@ -25,8 +26,13 @@ var
   map:Array [0..3,0..3] of integer;
   Img:Array [0..11] of TJPEGImage;
 implementation
-
+       uses Menu;
 {$R *.dfm}
+
+procedure TForm1.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+begin
+halt;
+end;
 
 procedure TForm1.FormCreate(Sender: TObject);
 var i,j:integer;
